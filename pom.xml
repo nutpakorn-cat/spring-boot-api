@@ -53,6 +53,67 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<Classifier>exec</Classifier>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.7.9</version>
+				<configuration>
+					<Excludes>
+						<Exclude>in/sivalabs/freelancerkit/entities/*</Exclude>
+						<Exclude>in/sivalabs/freelancerkit/*Application</Exclude>
+					</Excludes>
+				</configuration>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-prepare-agent-integration</id>
+						<goals>
+							<goal>prepare-agent-integration</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report-integration</id>
+						<goals>
+							<goal>report-integration</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<Rules>
+							 <Rule Implementation="Org.Jacoco.Maven.Ruleconfiguration">
+									<Element>BUNDLE</Element>
+									<Limits>
+										<Limit Implementation="Org.Jacoco.Report.Check.Limit">
+											<Counter>COMPLEXITY</Counter>
+											<Value>COVEREDRATIO</Value>
+											<Minimum>0.60</Minimum>
+										</Limit>
+									</Limits>
+								</Rule>
+							</Rules>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
